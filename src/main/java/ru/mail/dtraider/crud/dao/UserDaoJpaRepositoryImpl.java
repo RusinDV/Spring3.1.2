@@ -5,12 +5,11 @@ import org.springframework.stereotype.Repository;
 import ru.mail.dtraider.crud.model.User;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class UserDaoJpaRepositoryImpl implements UserDao {
     @Autowired
-    UserJPARepository userJPARepository;
+    UserJpaRepository userJPARepository;
 
     @Override
     public void createUser(User user) {
@@ -24,11 +23,18 @@ public class UserDaoJpaRepositoryImpl implements UserDao {
     }
 
     @Override
-    public void updateUser(Long idUser, String name, String lastname, int age) {
+    public User readUserByEmail(String email) {
+        return userJPARepository.findByEmail(email);
+    }
+
+    @Override
+    public void updateUser(Long idUser, String firstName, String lastName, int age, String email, String password) {
         User user = userJPARepository.getOne(idUser);
-        user.setName(name);
-        user.setLastName(lastname);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
         user.setAge(age);
+        user.setEmail(email);
+        user.setPassword(password);
         userJPARepository.save(user);
     }
 

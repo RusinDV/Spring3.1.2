@@ -1,6 +1,7 @@
 package ru.mail.dtraider.crud.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -9,32 +10,40 @@ public class User {
     private Long id;
 
     @Column
-    private String name;
+    private String firstName;
 
     @Column
     private String lastName;
 
     @Column
-    private String password;
+    private int age;
 
     @Column
-    private int age;
+    private String email;
+
+    @Column
+    private String password;
+
+    @Transient
+    private String authGroupList;
 
     public User() {
     }
 
-    public User(String name, String lastName, int age) {
-        this.name = name;
+    public User(String firstName, String lastName, int age, String email, String password) {
+        this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
+        this.email = email;
         this.password = password;
+    }
+
+    public String getAuthGroupList() {
+        return authGroupList;
+    }
+
+    public void setAuthGroupList(String authGroupList) {
+        this.authGroupList = authGroupList;
     }
 
     public Long getId() {
@@ -45,12 +54,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -69,13 +78,31 @@ public class User {
         this.age = age;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 }
