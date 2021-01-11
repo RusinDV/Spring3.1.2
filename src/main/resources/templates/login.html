@@ -24,24 +24,30 @@
         }
     </style>
 </head>
-<body>
-<div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-3">
+<body style="background: rgba(0,0,0,0.03) ">
+<br>
+<div class="container-fluid">
+<div class="row justify-content-center">
+    <div class="col-4"></div>
+    <div class="col-3">
 
         <form class="form-group" th:method="post" th:action="@{/login}" th:object="${user}">
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-            <label class="sr-only">Email address</label>
-            <input type="email" class="form-control" name="login" th:name="*{'username'}">
-            <label class="sr-only">Password</label>
-            <input type="password" class="form-control" name="password" th:name="*{'password'}">
+            <h2 class="h3 mb-3 font-weight-bold">Please sign in</h2>
+
+            <input type="email" class="form-control" name="login" th:name="*{'username'}" placeholder="Email address">
+
+            <input type="password" class="form-control" name="password" th:name="*{'password'}" placeholder="Password">
             <br>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
     </div>
-    <div class="col-md-5"></div>
+    <div class="col-5"></div>
 </div>
+<div class="fixed-bottom">
+    <h1 class="font-weight-light mr-md-5" style="float:right">Bootstrap</h1>
 
+</div>
+</div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

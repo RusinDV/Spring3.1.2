@@ -6,7 +6,18 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta charset="UTF-8">
     <style>
+    /*    body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
 
+        .container-fluid {
+            flex: 1;
+
+        }*/
     </style>
     <title>User page</title>
 </head>
@@ -21,7 +32,7 @@
         <a href="/logout" class="text-muted">Logout</a>
     </div>
 </nav>
-<div class="container-fluid">
+<div class="container-fluid ">
 
 
     <div class="row">
@@ -75,12 +86,13 @@
                         </table>
                     </div>
                 </div>
-                <h1 style="float: right">Bootstrap</h1>
+                <div class="fixed-bottom">
+                    <h1 class="font-weight-light mr-md-5" style="float:right">Bootstrap</h1>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

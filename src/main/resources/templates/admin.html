@@ -147,7 +147,7 @@
                                                                                 <strong>Password</strong>
                                                                                 <input type="password"
                                                                                        class="form-control"
-                                                                                       th:value="${user.password}"
+
                                                                                        th:name="password"/>
                                                                             </div>
 
@@ -244,14 +244,14 @@
                                                                                        readonly/>
                                                                             </div>
 
-                                                                            <div class="form-group">
+                                                                         <!--   <div class="form-group">
                                                                                 <strong>Password</strong>
                                                                                 <input type="password"
                                                                                        class="form-control"
                                                                                        th:value="${user.password}"
                                                                                        th:name="password"
                                                                                        readonly/>
-                                                                            </div>
+                                                                            </div>-->
 
                                                                             <div class="form-group">
                                                                                 <strong>Role</strong>
@@ -355,7 +355,11 @@
                                         </tr>
                                     </table>
                                 </div>
-                                <h1 style="float: right">Bootstrap</h1>
+                                <!--<h1 style="float: right">Bootstrap</h1>-->
+                                <div class="fixed-bottom">
+                                    <h1 class="font-weight-light mr-md-5" style="float:right">Bootstrap</h1>
+
+                                </div>
                             </div>
 
                         </div>
