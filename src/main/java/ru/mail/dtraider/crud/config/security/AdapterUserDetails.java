@@ -9,35 +9,38 @@ import ru.mail.dtraider.crud.model.User;
 
 import java.util.*;
 
-public class AdapterUserDetails implements UserDetails{
+public class AdapterUserDetails implements UserDetails {
 
-    User user;
-    List<AuthGroup> authGroupList;
+    private User user;
+    private List<AuthGroup> authGroupList;
 
     public AdapterUserDetails(User user, List<AuthGroup> authGroupList) {
         super();
         this.user = user;
-        this.authGroupList=authGroupList;
+        this.authGroupList = authGroupList;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<GrantedAuthority> grantedAuthoritySet=new HashSet<>();
-        if(authGroupList==null){
+        Set<GrantedAuthority> grantedAuthoritySet = new HashSet<>();
+        if (authGroupList == null) {
             return Collections.emptySet();
         }
         for (AuthGroup authGroup : authGroupList) {
             grantedAuthoritySet.add(new SimpleGrantedAuthority(authGroup.getAuthGroup()));
         }
-       return grantedAuthoritySet;
-
+        return grantedAuthoritySet;
     }
 
     @Override
-    public String getPassword() {        return user.getPassword();    }
+    public String getPassword() {
+        return user.getPassword();
+    }
 
     @Override
-    public String getUsername()  {      return user.getEmail();        }
+    public String getUsername() {
+        return user.getEmail();
+    }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -55,5 +58,7 @@ public class AdapterUserDetails implements UserDetails{
     }
 
     @Override
-    public boolean isEnabled() {      return true;    }
+    public boolean isEnabled() {
+        return true;
+    }
 }

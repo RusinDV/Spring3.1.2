@@ -1,5 +1,7 @@
 package ru.mail.dtraider.crud.model;
 
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,40 +11,35 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+
     private String firstName;
 
-    @Column
+
     private String lastName;
 
-    @Column
+
     private int age;
 
-    @Column
+
     private String email;
 
-    @Column
+
     private String password;
 
-    @Transient
-    private String authGroupList;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    @OrderBy("authGroup")
+    private List<AuthGroup> authGroupList;
 
     public User() {
     }
 
-    public User(String firstName, String lastName, int age, String email, String password) {
+    public User(String firstName, String lastName, int age, String email, String password, List<AuthGroup> authGroupList) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.email = email;
         this.password = password;
-    }
-
-    public String getAuthGroupList() {
-        return authGroupList;
-    }
-
-    public void setAuthGroupList(String authGroupList) {
         this.authGroupList = authGroupList;
     }
 
@@ -94,15 +91,16 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", age=" + age +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public List<AuthGroup> getAuthGroupList() {
+        return authGroupList;
+    }
+
+    public void setAuthGroupList(List<AuthGroup> authGroupList) {
+        if (this.authGroupList == null) {
+            this.authGroupList = authGroupList;
+        } else {
+            this.authGroupList.retainAll(authGroupList);
+            this.authGroupList.addAll(authGroupList);
+        }
     }
 }

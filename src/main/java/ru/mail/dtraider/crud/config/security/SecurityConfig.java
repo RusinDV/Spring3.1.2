@@ -23,13 +23,17 @@ import ru.mail.dtraider.crud.config.handler.LoginSuccessHandler;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    AdapterUserService adapterUserService;
+    private AdapterUserService adapterUserService;
 
+    @Bean
+    BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder(11);
+    }
 
     @Bean
     DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder(11));
+        daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
         daoAuthenticationProvider.setUserDetailsService(adapterUserService);
         daoAuthenticationProvider.setAuthoritiesMapper(authoritiesMapper());
         return daoAuthenticationProvider;
@@ -58,16 +62,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").successHandler(myAuthenticationSuccessHandler())
-                .failureUrl("/error").permitAll()
-                .and().exceptionHandling().accessDeniedPage("/error")
                 .and()
                 .logout().invalidateHttpSession(true).clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/").permitAll();
-
-
-
-
     }
 
     @Bean

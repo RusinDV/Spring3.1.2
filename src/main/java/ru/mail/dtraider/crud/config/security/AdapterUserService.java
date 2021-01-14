@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.mail.dtraider.crud.model.AuthGroup;
 import ru.mail.dtraider.crud.model.User;
-import ru.mail.dtraider.crud.service.AuthGroupService;
 import ru.mail.dtraider.crud.service.UserService;
 
 
@@ -18,10 +17,7 @@ import java.util.List;
 public class AdapterUserService implements UserDetailsService {
 
     @Autowired
-    UserService userService;
-
-    @Autowired
-    AuthGroupService authGroupService;
+    private UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
@@ -29,9 +25,7 @@ public class AdapterUserService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("cannot find user " + s);
         }
-        List<AuthGroup> authGroupList= authGroupService.getListAuthGroupByName(s);
-        System.out.println(authGroupList);
-        System.out.println(user);
+        List<AuthGroup> authGroupList= user.getAuthGroupList();
         return new AdapterUserDetails(user,authGroupList);
     }
 }
